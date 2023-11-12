@@ -13,16 +13,15 @@ class SpeechServie(Service):
         region = config.get('Speech', 'region')
         super().__init__(key, endpoint, region)
         self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=endpoint)
+        self.recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
 
-    def from_mic(self):
-        print("Speak into your microphone.")
-        recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
-        result = recognizer.recognize_once()
+    def from_mic(self, verbose=False):
+        result = self.recognizer.recognize_once()
         if result.reason == speechsdk.ResultReason.RecognizedSpeech:
-            print("Recognized: {}".format(result.text))
-        elif result.reason == speechsdk.ResultReason.NoMatch:
+            return result.text
+        elif verbose and result.reason == speechsdk.ResultReason.NoMatch:
             print("No speech could be recognized: {}".format(result.no_match_details))
-        elif result.reason == speechsdk.ResultReason.Canceled:
+        elif verbose and result.reason == speechsdk.ResultReason.Canceled:
             cancellation_details = result.cancellation_details
             print("Speech Recognition canceled: {}".format(cancellation_details.reason))
             if cancellation_details.reason == speechsdk.CancellationReason.Error:
