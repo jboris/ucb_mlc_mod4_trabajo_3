@@ -5,19 +5,19 @@ from service import Service
 
 
 class SpeechServie(Service):
-    def __int__(self):
+    def __init__(self):
         config = configparser.ConfigParser()
         config.read('config.ini')
         key = config.get('Speech', 'key')
         endpoint = config.get('Speech', 'endpoint')
         region = config.get('Speech', 'region')
         super().__init__(key, endpoint, region)
-        self.config = speechsdk.SpeechConfig(subscription=key, region=region)
-        self.recognizer = speechsdk.SpeechRecognizer(speech_config=config, language="es-BO")
+        self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=endpoint)
 
     def from_mic(self):
         print("Speak into your microphone.")
-        result = self.recognizer.recognize_once()
+        recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
+        result = recognizer.recognize_once()
         if result.reason == speechsdk.ResultReason.RecognizedSpeech:
             print("Recognized: {}".format(result.text))
         elif result.reason == speechsdk.ResultReason.NoMatch:
