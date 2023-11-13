@@ -2,7 +2,6 @@
 from azure.ai.textanalytics import ExtractiveSummaryAction, TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 
-
 from .service import Service
 
 
@@ -29,3 +28,18 @@ class LanguageServie(Service):
                     extract_summary_result.code, extract_summary_result.message
                 ))
     
+    def recognize_person(self, document, verbose=False):
+        persons = []
+        try:
+            entities = self.client.recognize_entities(documents=[document])[0].entities
+            for entity in entities:
+                if entity.category == 'Person':
+                    persons.append([entity.confidence_score, entity.text])
+        except Exception as err:
+            if verbose:
+                print("Encountered exception. {}".format(err))
+        if persons:
+            persons = sorted(persons)
+            return persons[-1][1]
+        return None
+        
