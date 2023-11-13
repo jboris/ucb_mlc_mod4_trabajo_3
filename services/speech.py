@@ -1,4 +1,4 @@
-import configparser
+
 import azure.cognitiveservices.speech as speechsdk
 
 from .service import Service
@@ -6,13 +6,8 @@ from .service import Service
 
 class SpeechServie(Service):
     def __init__(self):
-        config = configparser.ConfigParser()
-        config.read('config.ini')
-        key = config.get('Speech', 'key')
-        endpoint = config.get('Speech', 'endpoint')
-        region = config.get('Speech', 'region')
-        super().__init__(key, endpoint, region)
-        self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=endpoint)
+        super().__init__('Speech')
+        self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=self.endpoint)
         self.recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
 
     def listen(self, verbose=False):
