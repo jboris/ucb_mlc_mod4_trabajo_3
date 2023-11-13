@@ -15,7 +15,7 @@ class SpeechServie(Service):
         self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=endpoint)
         self.recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
 
-    def from_mic(self, verbose=False):
+    def listen(self, verbose=False):
         result = self.recognizer.recognize_once()
         if result.reason == speechsdk.ResultReason.RecognizedSpeech:
             return result.text
