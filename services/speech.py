@@ -8,6 +8,7 @@ class SpeechServie(Service):
     def __init__(self):
         super().__init__('Speech')
         self.config = speechsdk.SpeechConfig(subscription=self.key, endpoint=self.endpoint)
+        self.config.speech_synthesis_voice_name='es-BO-MarceloNeural'
         self.recognizer = speechsdk.SpeechRecognizer(speech_config=self.config, language="es-BO")
 
     def listen(self, verbose=False):
