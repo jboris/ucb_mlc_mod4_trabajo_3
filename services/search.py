@@ -17,9 +17,16 @@ class KnowledgeGraphSearchService(Service):
         }
         response = requests.get(self.endpoint, params=params)
         data = response.json()
-        if "itemListElement" in data and len(data["itemListElement"]) > 0:
-            result = data["itemListElement"][0]["result"]
-            description = result["detailedDescription"]["articleBody"]
-            return description
-        elif verbose:
-            print("No se encontraron resultados para la consulta.")
+        try:
+            if "itemListElement" in data and len(data["itemListElement"]) > 0:
+                result = data["itemListElement"][0]["result"]
+                description = result["detailedDescription"]["articleBody"]
+                return description
+            else:
+                if verbose:
+                    print("No se encontraron resultados para la consulta.")
+                return None
+        except:
+            if verbose:
+                    print("No se encontraron resultados para la consulta.")
+            return None
