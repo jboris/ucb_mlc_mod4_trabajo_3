@@ -24,8 +24,10 @@ class SpeechServie(Service):
                 print("Error details: {}".format(cancellation_details.error_details))
                 print("Did you set the speech resource key and region values?")
                 
-    def talk(self, text, verbose=False):
+    def talk(self, text, verbose=False, started_cb=None, completed_cb=None):
         synthesizer = speechsdk.SpeechSynthesizer(speech_config=self.config)
+        synthesizer.synthesis_started.connect(started_cb)
+        synthesizer.synthesis_completed.connect(completed_cb)
         result = synthesizer.speak_text_async(text).get()
         if verbose and result.reason != speechsdk.ResultReason.SynthesizingAudioCompleted:
             print("Error to convert the text: {}".format(resultado.reason))
