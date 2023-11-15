@@ -4,7 +4,7 @@ import requests
 from .service import Service
 
 
-class KnowledgeGraphSearchServie(Service):
+class KnowledgeGraphSearchService(Service):
     def __init__(self):
         super().__init__('GoogleKnowledgeGraphSearch')
 
