@@ -22,8 +22,8 @@ class AlessandroBot:
             print('query:', query)
         thinking_callback()
         answer = 'No te escuche bien, ¿me puedes repetir la consulta?'
-        if query.startswith(self.name.lower())):
-            query = query[len(self.name)):]
+        if query.startswith(self.name.lower()):
+            query = query[len(self.name):]
         if query:
             if self.services['content_safety'].is_offensive(query):
                 answer = 'Lo siento, no puedo ayudarte porque he detectado contenido ofensivo en tu pregunta'
