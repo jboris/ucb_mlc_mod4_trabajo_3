@@ -13,12 +13,13 @@ class AlessandroBot:
             'speech': SpeechServie(),
         }
         
-    def ask(self, verbose=False, started_cb=None, completed_cb=None):
+    def ask(self, verbose=False, started_cb=None, completed_cb=None, thinking_callback=None):
         if verbose:
             print('listen')
         query = self.services['speech'].listen()
         if verbose:
             print('query:', query)
+        thinking_callback()
         answer = 'No te escuche bien, ¿me puedes repetir la consulta?'
         if query:
             if self.services['content_safety'].is_offensive(query):
