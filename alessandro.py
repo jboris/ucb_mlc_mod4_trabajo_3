@@ -5,7 +5,8 @@ from services.speech import SpeechServie
 
 
 class AlessandroBot:
-    def __init__(self):
+    def __init__(self, name='Alessandro'):
+        self.name = name
         self.services = {
             'content_safety': ContentSafetyServie(),
             'language': LanguageServie(),
@@ -16,11 +17,13 @@ class AlessandroBot:
     def ask(self, verbose=False, started_cb=None, completed_cb=None, thinking_callback=None):
         if verbose:
             print('listen')
-        query = self.services['speech'].listen()
+        query = self.services['speech'].listen().strip().lower()
         if verbose:
             print('query:', query)
         thinking_callback()
         answer = 'No te escuche bien, ¿me puedes repetir la consulta?'
+        if query.startswith(self.name.lower())):
+            query = query[len(self.name)):]
         if query:
             if self.services['content_safety'].is_offensive(query):
                 answer = 'Lo siento, no puedo ayudarte porque he detectado contenido ofensivo en tu pregunta'
