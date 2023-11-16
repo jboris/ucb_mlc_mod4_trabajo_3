@@ -24,11 +24,11 @@ recognize_person: A partir de un texto, encuentra a la entidad de tipo persona c
 
 - **Clase SearchService:**  Crea una clase Knowledge Graph SearchService que también hereda de la clase Service. Su propósito es realizar búsquedas en el Knowledge Graph de Google utilizando su API. Busca información sobre una persona utilizando la API de Google Knowledge Graph.
 
-Toma el nombre de la persona.
-Hace una solicitud a Google con ese nombre para obtener información.
-Revisa si hay resultados y si encuentra algo, te muestra detalles sobre esa persona.
-Si no encuentra nada, devuelve vacío.
-Y si le pides, te avisa si no halla ningún dato.
+  * Toma el nombre de la persona.
+  * Hace una solicitud a Google con ese nombre para obtener información.
+  * Revisa si hay resultados y si encuentra algo, te muestra detalles sobre esa persona.
+  * Si no encuentra nada, devuelve vacío.
+  * Y si le pides, te avisa si no halla ningún dato.
 
 - **Clase alessandro:** Implementa al asistente bot, para lo cual hace uso de diferentes servicios. Contiene un método:
 ask: Usa el SpeechService para escuchar la pregunta. Usando el ContentService verifica que no tenga contenido ofensivo. Con LanguageService se realiza un resumen de la pregunta y la identificación de una persona. Con la persona identificada y SearchService se busca información sobre la misma. Finalmente, SpeechService se utiliza para dar la respuesta de manera hablada.
