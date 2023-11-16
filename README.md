@@ -53,4 +53,4 @@ Bucle Principal: Al correr, la aplicación entra en un bucle donde maneja evento
 Reproducción de Sonido: play_sound usa hilos para reproducir audio sin congelar la GUI. Se utilizan callbacks para sincronizar el estado del avatar con el audio.
 - **Manejo de Eventos:** Eventos de mouse y de usuario son manejados para activar animaciones y reproducción de sonido.
 
-La explicación del proyecto se encuentra en este ![vídeo](https://drive.google.com/file/d/1uBPxC7fhEFs7Pdy65Yq5bkB42oeUbGCx/view?usp=sharing).
+La explicación del proyecto se encuentra en este [vídeo](https://drive.google.com/file/d/1uBPxC7fhEFs7Pdy65Yq5bkB42oeUbGCx/view?usp=sharing).
